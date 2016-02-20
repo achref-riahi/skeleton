@@ -1,0 +1,16 @@
+version: '2'
+services:
+  worker:
+    build: .
+    depends_on:
+      - redis
+    environment:
+      - C_FORCE_ROOT=1
+    command: /usr/local/bin/skeleton_worker --broker redis://redis
+  redis:
+    image: redis
+  web:
+    build: .
+    depends_on:
+      - redis
+    command: skeleton_web --listen=:80
