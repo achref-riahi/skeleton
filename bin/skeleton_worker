@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+
+celery worker -A skeleton.celery.app "$@"
