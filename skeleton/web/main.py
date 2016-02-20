@@ -23,6 +23,8 @@ def main():
 
     parse_command_line(final=False)
 
+    options.run_parse_callbacks()  # same as final=True
+
     application = tornado.web.Application(routes)
     server = tornado.httpserver.HTTPServer(application)
     for addr in options.listen:

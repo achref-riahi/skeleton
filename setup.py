@@ -16,6 +16,10 @@ setup(
             "skeleton_web=skeleton.web.main:main"
         ]
     },
+    install_requires=[
+        "tornado",
+        "raven"
+    ],
     scripts=['bin/skeleton_worker'],
     zip_safe=False,
     extras_require={
