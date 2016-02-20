@@ -3,10 +3,12 @@ from __future__ import absolute_import, print_function, unicode_literals
 
 import sys
 
-import tornado.ioloop
-from tornado.options import options, define, print_help, parse_command_line, parse_config_file
-import tornado.web
 import tornado.httpserver
+import tornado.ioloop
+import tornado.web
+from raven.contrib.tornado import AsyncSentryClient
+from tornado.options import (define, options, parse_command_line,
+                             parse_config_file, print_help)
 
 from .routes import routes
 
