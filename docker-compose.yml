@@ -1,16 +1,23 @@
 version: '2'
 services:
   worker:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
     depends_on:
       - redis
     environment:
-      - C_FORCE_ROOT=1
-    command: skeleton_worker --broker redis://redis
+      CELERY_BROKER_URL: redis://redis
   redis:
     image: redis
   web:
     build: .
+    ports:
+      - "8080:80"
     depends_on:
       - redis
-    command: skeleton_web --listen=:80
+    command: /bin/sh -c  "pip install --editable . && skeleton_web --listen=:80"
+    volumes:
+      - .:/code
+    environment:
+      DEBUG: 1

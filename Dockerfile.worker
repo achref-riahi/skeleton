@@ -1,0 +1,9 @@
+FROM python:2.7-alpine
+
+ENV C_FORCE_ROOT=1
+
+COPY . /tmp/package
+RUN pip install /tmp/package[worker]
+RUN rm -rf /tmp/package
+
+CMD skeleton_worker

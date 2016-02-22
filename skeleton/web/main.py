@@ -1,6 +1,7 @@
 # coding: utf-8
 from __future__ import absolute_import, print_function, unicode_literals
 
+import os
 import sys
 
 import tornado.httpserver
@@ -11,7 +12,6 @@ from tornado.options import (define, options, parse_command_line,
                              parse_config_file, print_help)
 
 from .routes import routes
-
 
 def main():
     define("config_dir")
@@ -25,7 +25,7 @@ def main():
 
     options.run_parse_callbacks()  # same as final=True
 
-    application = tornado.web.Application(routes)
+    application = tornado.web.Application(routes, debug=bool(os.getenv("DEBUG")))
     server = tornado.httpserver.HTTPServer(application)
     for addr in options.listen:
         port = 80
